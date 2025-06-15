@@ -114,9 +114,51 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
   }
+}
+/* @layer utilities {
+  .gradient {
+    @apply bg-gradient-to-br from-blue-600 to-purple-600;
+  }
+  .gradient-title {
+    @apply gradient font-extrabold tracking-tighter pr-2 pb-2 text-transparent bg-clip-text;
+  }
+} */
+ .gradient {
+  background-image: linear-gradient(to bottom right, #2563eb, #8b5cf6); /* from-blue-600 to-purple-600 */
+}
+
+.gradient-title {
+  font-weight: 800; /* font-extrabold */
+  letter-spacing: -0.05em; /* tracking-tighter */
+  padding-right: 0.5rem; /* pr-2 */
+  padding-bottom: 0.5rem; /* pb-2 */
+  
+  background-image: linear-gradient(to bottom right, #2563eb, #8b5cf6); /* gradient */
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent; /* ensures Safari/Chrome render text as transparent */
+}
+
+
+
+
+.hero-image-wrapper {
+  perspective: 1000px;
+}
+
+.hero-image {
+  /* transform: rotateX(20deg) scale(0.9) translateY(-50); */
+  transform: rotateX(15deg) scale(1);
+  transition: transform 0.5s ease-out;
+  will-change: transform;
+}
+
+.hero-image.scrolled {
+  transform: rotateX(0deg) scale(1) translateY(40px);
 }
