@@ -3,9 +3,8 @@ import { Button } from "./ui/button";
 import { PenBox, LayoutDashboard } from "lucide-react";
 import Link from "next/link";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-
-import Image from "next/image";
 import { checkUser } from "@/lib/checkUser";
+import Image from "next/image";
 
 const Header = async () => {
   await checkUser();
@@ -16,7 +15,7 @@ const Header = async () => {
         <Link href="/">
           <Image
             src={"/logo.png"}
-            alt="FinTract+ Logo"
+            alt="Welth Logo"
             width={200}
             height={60}
             className="h-12 w-auto object-contain"
