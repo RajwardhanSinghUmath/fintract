@@ -27,9 +27,10 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import CreateAccountDrawer  from "@/components/create-account-drawer";
 import { cn } from "@/lib/utils";
-import { createTransaction} from "@/actions/transaction";
+import { createTransaction, updateTransaction } from "@/actions/transaction";
 import { transactionSchema } from "@/app/lib/schema";
 import { ReceiptScanner } from "./recipt-scanner";
+
 export function AddTransactionForm({
   accounts,
   categories,
@@ -51,7 +52,20 @@ export function AddTransactionForm({
   } = useForm({
     resolver: zodResolver(transactionSchema),
     defaultValues:
-       {
+      editMode && initialData
+        ? {
+            type: initialData.type,
+            amount: initialData.amount.toString(),
+            description: initialData.description,
+            accountId: initialData.accountId,
+            category: initialData.category,
+            date: new Date(initialData.date),
+            isRecurring: initialData.isRecurring,
+            ...(initialData.recurringInterval && {
+              recurringInterval: initialData.recurringInterval,
+            }),
+          }
+        : {
             type: "EXPENSE",
             amount: "",
             description: "",
@@ -80,7 +94,7 @@ export function AddTransactionForm({
     }
   };
 
- const handleScanComplete = (scannedData) => {
+  const handleScanComplete = (scannedData) => {
     if (scannedData) {
       setValue("amount", scannedData.amount.toString());
       setValue("date", new Date(scannedData.date));
@@ -118,7 +132,6 @@ export function AddTransactionForm({
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       {/* Receipt Scanner - Only show in create mode */}
       {!editMode && <ReceiptScanner onScanComplete={handleScanComplete} />}
-     
 
       {/* Type */}
       <div className="space-y-2">
