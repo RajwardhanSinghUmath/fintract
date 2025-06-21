@@ -141,9 +141,9 @@ export function AccountChart({ transactions }) {
                 tickFormatter={(value) => `$${value}`}
               />
               <Tooltip
-                formatter={(value) => [`$${value.toFixed(2)}`, undefined]}
+                formatter={(value) => [`$${value}`, undefined]}
                 contentStyle={{
-                  backgroundColor: "white",
+                  backgroundColor: "hsl(var(--popover))",
                   border: "1px solid hsl(var(--border))",
                   borderRadius: "var(--radius)",
                 }}

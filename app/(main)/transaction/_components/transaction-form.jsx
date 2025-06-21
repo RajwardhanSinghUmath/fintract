@@ -25,7 +25,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
-import CreateAccountDrawer  from "@/components/create-account-drawer";
+import { CreateAccountDrawer } from "@/components/create-account-drawer";
 import { cn } from "@/lib/utils";
 import { createTransaction, updateTransaction } from "@/actions/transaction";
 import { transactionSchema } from "@/app/lib/schema";
@@ -129,7 +129,8 @@ export function AddTransactionForm({
   );
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="space-y-6">
       {/* Receipt Scanner - Only show in create mode */}
       {!editMode && <ReceiptScanner onScanComplete={handleScanComplete} />}
 
@@ -305,7 +306,7 @@ export function AddTransactionForm({
       )}
 
       {/* Actions */}
-      <div className="flex gap-4">
+      <div className="grid grid-cols-2 gap-4">
         <Button
           type="button"
           variant="outline"
@@ -326,6 +327,7 @@ export function AddTransactionForm({
             "Create Transaction"
           )}
         </Button>
+      </div>
       </div>
     </form>
   );
